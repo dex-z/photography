@@ -1,0 +1,35 @@
+html, body {
+    min-height: 100%;
+    background: #f5f4f4;
+    font-family: Helvetica;
+  }
+  
+  main {
+    padding: 2rem;
+  }
+  
+  #photo-list {
+    margin: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 2rem;
+    align-items: center;
+  }
+  
+  #photo-list img {
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 6px 0px  rgba(0,0,0,0.3);
+    max-width: 100%;
+  }
+  
+  #photo-list button {
+    margin: 6rem;
+    display: block;
+    visibility: visible;
+  }
+  
+  #photo-list figure:hover button {
+    margin: 0 auto;
+    display: block;
+    visibility: visible;
+  }
