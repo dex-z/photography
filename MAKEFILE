@@ -1,0 +1,13 @@
+
+
+@echo bootstrap
+npx cdk bootstrap \
+  --profile account-profile \
+  --cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess \
+  aws://516627408046/us-east-1
+
+
+@echo CDN validation
+
+
+@echo upload files to S3
