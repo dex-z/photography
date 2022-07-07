@@ -10,6 +10,7 @@ import { S3EventSource } from 'aws-cdk-lib/aws-lambda-event-sources';
 import * as sns from 'aws-cdk-lib/aws-sns';
 import * as events from 'aws-cdk-lib/aws-events';
 import * as targets from "aws-cdk-lib/aws-events-targets";
+import * as chatbot from 'aws-cdk-lib/aws-chatbot';
 
 export class PhotographyStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
@@ -122,7 +123,11 @@ export class PhotographyStack extends Stack {
       topicName: "WebsiteIsDown",
       displayName: "Website is Down"
     })
-
+    const apiTopic = new sns.Topic(this, "apiwCount", {
+      topicName: "apiCount",
+      displayName: "apigateway trigger count"
+    })
+    // monitorTopic.addSubscription(new subscriptions.EmailSubscription(emailAddress.valueAsString));
     // Lambda function 
     const monitorWebsiteFunction = new lambda.Function(this, "MonitorWebsite", {
       runtime: lambda.Runtime.NODEJS_14_X,
@@ -144,6 +149,20 @@ export class PhotographyStack extends Stack {
         })
       ]
     });
+
+    // Chatbot configuration
+    // declare const project: codebuild.Project;
+
+    // This can be re-enabled after Chatbot workspace authentication is fixed
+    // const target = new chatbot.SlackChannelConfiguration(this, 'CDK-Chatbot-Slack', {
+    //   slackChannelConfigurationName: 'devops',
+    //   slackWorkspaceId: 'T01EXEXPMN0',
+    //   slackChannelId: 'C01EAHTMG7R',
+    //   loggingLevel: chatbot.LoggingLevel.ERROR,
+
+    // });
+
+    // const rule = project.notifyOnBuildSucceeded('NotifyOnBuildSucceeded', target);
 
     new CfnOutput(this, "AppBucket", { value: appBucket.bucketName })
     new CfnOutput(this, "CfDistDomainName", { value: appDistribution.domainName })
